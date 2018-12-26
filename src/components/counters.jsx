@@ -4,7 +4,7 @@ import Counter from './counter'
 class Counters extends Component {
     render() {
         return (
-            <div>
+            <div className="container">
                 <button onClick={this.props.onReset} className="btn btn-info btn-sm m-2">Reset</button>
                 {this.props.counters.map(counter =>
                     <Counter

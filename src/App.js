@@ -2,6 +2,9 @@ import React, {Component} from 'react';
 import './App.css';
 import NavBar from './components/NavBar'
 import Counters from './components/counters'
+import {BrowserRouter as Router, Route} from 'react-router-dom'
+import Register from './components/Register'
+import Comments from './components/Comments'
 
 class App extends Component {
     state = {
@@ -18,7 +21,7 @@ class App extends Component {
         this.setState({counters})
     };
 
-    handleReset= () => {
+    handleReset = () => {
         const counters = this.state.counters.map(c => {
             c.value = 0;
             return c;
@@ -27,7 +30,7 @@ class App extends Component {
     };
 
     handleIncrement = counter => {
-        const counters  = [...this.state.counters];
+        const counters = [...this.state.counters];
         const index = counters.indexOf(counter);
         counters[index] = {...counter};
         counters[index].value++;
@@ -36,18 +39,29 @@ class App extends Component {
 
     render() {
         return (
-            <div>
-                <NavBar
-                    totalCounters={this.state.counters.filter(c => c.value > 0).length}
-                />
-                <Counters
-                    onDelete={this.handleDelete}
-                    onIncrement={this.handleIncrement}
-                    onReset={this.handleReset}
-                    counters={this.state.counters}
-                />
+            <Router>
+                <div>
+                    <NavBar
+                        totalCounters={this.state.counters.filter(c => c.value > 0).length}
+                    />
 
-            </div>
+
+                    <Route
+                        path="/"
+                        exact
+                        render = {() => <Counters
+                            onDelete={this.handleDelete}
+                            onReset={this.handleReset}
+                            onIncrement={this.handleIncrement}
+                            counters={this.state.counters}/>
+                        }
+                    />
+                    <Route path="/register" exact component={Register}/>
+                    <Route path="/login" exact component={Register}/>
+                    <Route path="/comments" exact component={Comments}/>
+                </div>
+
+            </Router>
         );
     }
 }
