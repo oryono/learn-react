@@ -37,7 +37,7 @@ class Comments extends Component {
             return (
                 <div className="container col-xs-1"  align="center">
                     <Loader
-                        type="Oval"
+                        type="Bars"
                         color="#00BFFF"
                         height="100"
                         width="100"

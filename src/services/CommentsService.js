@@ -5,7 +5,7 @@ export default {
         return Api.get('/comments')
     },
 
-    comments() {
+    comment() {
 
     }
 
